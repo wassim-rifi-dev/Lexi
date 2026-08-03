@@ -1,5 +1,7 @@
 package dev.wassim.lexi.domain.modal;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,4 +31,6 @@ public class Word {
 
     @Column(name = "wrong_meaning_3")
     private String wrongMeaning3;
+
+    private LocalDate day;
 }
