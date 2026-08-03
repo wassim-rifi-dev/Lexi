@@ -2,6 +2,16 @@ spring:
   application:
     name: lexi
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lexi
+    username: postgres
+    password: 198003
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
 app:
   cors:
     allowed-origins:
