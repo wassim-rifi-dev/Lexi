@@ -1,7 +1,7 @@
 package dev.wassim.lexi.gemini.client;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClient;
 
 import dev.wassim.lexi.gemini.dto.request.GeminiRequest;
 import dev.wassim.lexi.gemini.dto.response.GeminiApiResponse;
@@ -16,7 +16,8 @@ public class GeminiClient {
     private final ObjectMapper objectMapper;
     private final GeminiMapper geminiMapper;
 
-    private String key = "${GEMINI_API_KEY}";
+    @Value("${gemini.api.key}")
+    private String key;
 
     public GeminiResponse generateWords(GeminiRequest request) {
         GeminiApiResponse response = geminiMapper.toGeminiResponse(key, request);
