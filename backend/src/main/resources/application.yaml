@@ -3,8 +3,8 @@ spring:
     name: lexi
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
+    url: jdbc:postgresql://localhost:5432/lexi
+    username: postgres
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
@@ -20,4 +20,4 @@ app:
 gemini:
   api:
     key: ${GEMINI_API_KEY}
-    base-url: https://generativelanguage.googleapis.com/v1beta/models
+    base-url: https://generativelanguage.googleapis.com
