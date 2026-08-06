@@ -19,22 +19,9 @@ public class GeminiClient {
     private String key = "${GEMINI_API_KEY}";
 
     public GeminiResponse generateWords(GeminiRequest request) {
-        GeminiApiResponse response = RestClient.create()
-            .post()
-            .uri(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=" + key
-            )
-            .body(request)
-            .retrieve()
-            .body(GeminiApiResponse.class);
+        GeminiApiResponse response = geminiMapper.toGeminiResponse(key, request);
 
-        String innerJson = response
-            .getCandidates()
-            .get(0)
-            .getContent()
-            .getParts()
-            .get(0)
-            .getText();
+        String innerJson = geminiMapper.toGeminiResponseJson(response);
 
         return objectMapper.readValue(innerJson, GeminiResponse.class);
     }
