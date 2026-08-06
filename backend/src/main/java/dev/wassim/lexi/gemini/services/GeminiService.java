@@ -1,21 +1,19 @@
 package dev.wassim.lexi.gemini.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import dev.wassim.lexi.gemini.client.GeminiClient;
-import dev.wassim.lexi.gemini.dto.request.Content;
 import dev.wassim.lexi.gemini.dto.request.GeminiRequest;
-import dev.wassim.lexi.gemini.dto.request.Part;
 import dev.wassim.lexi.gemini.dto.response.GeminiResponse;
+import dev.wassim.lexi.gemini.mapper.GeminiMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class GeminiService {
     private final GeminiClient geminiClient;
+    private final GeminiMapper geminiMapper;
 
     private static final String prompt = """
             You are an English vocabulary generator for an AI-powered English learning application.
@@ -56,24 +54,7 @@ public class GeminiService {
 
     public void generateWords() {
         try {
-            GeminiRequest request = GeminiRequest.builder()
-                    .contents(
-                            List.of(
-                                    Content.builder()
-                                            .parts(
-                                                    List.of(
-                                                            Part.builder()
-                                                                    .text(prompt)
-                                                                    .build()
-                                                    )
-                                            )
-                                            .build()
-                            )
-                    )
-                    .build();
-
-            System.out.println("Request :");
-            System.out.println(request);
+            GeminiRequest request = geminiMapper.toGeminiRequest(prompt);
 
             GeminiResponse response = geminiClient.generateWords(request);
 

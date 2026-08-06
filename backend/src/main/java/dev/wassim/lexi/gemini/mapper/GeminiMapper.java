@@ -1,9 +1,13 @@
 package dev.wassim.lexi.gemini.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import dev.wassim.lexi.gemini.dto.request.Content;
 import dev.wassim.lexi.gemini.dto.request.GeminiRequest;
+import dev.wassim.lexi.gemini.dto.request.Part;
 import dev.wassim.lexi.gemini.dto.response.GeminiApiResponse;
 
 @Component
@@ -26,5 +30,23 @@ public class GeminiMapper {
                         .getParts()
                         .get(0)
                         .getText();
+    }
+
+    public GeminiRequest toGeminiRequest(String prompt) {
+        return GeminiRequest.builder()
+                    .contents(
+                            List.of(
+                                    Content.builder()
+                                            .parts(
+                                                    List.of(
+                                                            Part.builder()
+                                                                    .text(prompt)
+                                                                    .build()
+                                                    )
+                                            )
+                                            .build()
+                            )
+                    )
+                    .build();
     }
 }
