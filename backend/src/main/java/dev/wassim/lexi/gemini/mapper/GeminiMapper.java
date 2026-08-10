@@ -12,41 +12,41 @@ import dev.wassim.lexi.gemini.dto.response.GeminiApiResponse;
 
 @Component
 public class GeminiMapper {
-    public GeminiApiResponse toGeminiResponse(String key , GeminiRequest request) {
-        return RestClient.create()
-                        .post()
-                        .uri(
-                            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=" + key
+        public GeminiApiResponse toGeminiResponse(String key , GeminiRequest request) {
+                return RestClient.create()
+                                .post()
+                                .uri(
+                                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=" + key
+                                )
+                                .body(request)
+                                .retrieve()
+                                .body(GeminiApiResponse.class);
+        }
+
+        public String toGeminiResponseJson(GeminiApiResponse response) {
+                return response.getCandidates()
+                                .get(0)
+                                .getContent()
+                                .getParts()
+                                .get(0)
+                                .getText();
+        }
+
+        public GeminiRequest toGeminiRequest(String prompt) {
+                return GeminiRequest.builder()
+                        .contents(
+                                List.of(
+                                        Content.builder()
+                                                .parts(
+                                                        List.of(
+                                                                Part.builder()
+                                                                        .text(prompt)
+                                                                        .build()
+                                                        )
+                                                )
+                                                .build()
+                                )
                         )
-                        .body(request)
-                        .retrieve()
-                        .body(GeminiApiResponse.class);
-    }
-
-    public String toGeminiResponseJson(GeminiApiResponse response) {
-        return response.getCandidates()
-                        .get(0)
-                        .getContent()
-                        .getParts()
-                        .get(0)
-                        .getText();
-    }
-
-    public GeminiRequest toGeminiRequest(String prompt) {
-        return GeminiRequest.builder()
-                    .contents(
-                            List.of(
-                                    Content.builder()
-                                            .parts(
-                                                    List.of(
-                                                            Part.builder()
-                                                                    .text(prompt)
-                                                                    .build()
-                                                    )
-                                            )
-                                            .build()
-                            )
-                    )
-                    .build();
-    }
+                        .build();
+                }
 }

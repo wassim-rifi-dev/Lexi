@@ -36,6 +36,7 @@ public class GeminiService {
                 "lessons": [
                     {
                         "word": "Hello",
+                        "sentence": "Hello in my new house"
                         "correct_meaning": "مرحبا",
                         "wrong_meaning_1": "وداعا",
                         "wrong_meaning_2": "شكرا",
@@ -52,17 +53,11 @@ public class GeminiService {
     @Value("${gemini.api.key}")
     private String key;
 
-    public void generateWords() {
-        try {
-            GeminiRequest request = geminiMapper.toGeminiRequest(prompt);
+    public GeminiResponse generateWords() {
+        GeminiRequest request = geminiMapper.toGeminiRequest(prompt);
 
-            GeminiResponse response = geminiClient.generateWords(request);
+        GeminiResponse response = geminiClient.generateWords(request);
 
-            System.out.println("Response :");
-            System.out.println(response);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return response;
     }
 }
