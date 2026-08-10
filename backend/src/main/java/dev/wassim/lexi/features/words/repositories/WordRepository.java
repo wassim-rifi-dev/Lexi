@@ -10,4 +10,6 @@ import java.time.LocalDate;
 
 public interface WordRepository extends JpaRepository<Word , Long> {
     List<Word> findByDay(LocalDate day);
+
+    boolean existsByDay(LocalDate day);
 }
