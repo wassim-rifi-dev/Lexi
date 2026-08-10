@@ -36,6 +36,7 @@ public class GeminiService {
                 "lessons": [
                     {
                         "word": "Hello",
+                        "sentence": "Hello in my new house"
                         "correct_meaning": "مرحبا",
                         "wrong_meaning_1": "وداعا",
                         "wrong_meaning_2": "شكرا",
