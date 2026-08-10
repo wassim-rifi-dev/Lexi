@@ -1,5 +1,6 @@
 package dev.wassim.lexi.gemini.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -59,15 +60,17 @@ public class GeminiService {
     private String key;
 
     public void generateWords() {
-        GeminiRequest request = geminiMapper.toGeminiRequest(prompt);
+        if (!wordRepository.existsByDay(LocalDate.now())) {
+            GeminiRequest request = geminiMapper.toGeminiRequest(prompt);
 
-        GeminiResponse response = geminiClient.generateWords(request);
+            GeminiResponse response = geminiClient.generateWords(request);
 
-        List<Word> words = response.getLessons()
-                            .stream()
-                            .map(geminiMapper::buildWord)
-                            .toList();
+            List<Word> words = response.getLessons()
+                                .stream()
+                                .map(geminiMapper::buildWord)
+                                .toList();
 
-        wordRepository.saveAll(words);
+            wordRepository.saveAll(words);
+        }
     }
 }
