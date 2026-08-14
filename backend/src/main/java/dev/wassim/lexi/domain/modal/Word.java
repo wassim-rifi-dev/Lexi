@@ -2,13 +2,12 @@ package dev.wassim.lexi.domain.modal;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.Audited.Table;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
@@ -38,4 +37,7 @@ public class Word {
     private String wrongMeaning3;
 
     private LocalDate day;
+
+    @Builder.Default
+    private boolean finished = false;
 }
