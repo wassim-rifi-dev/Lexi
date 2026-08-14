@@ -20,7 +20,7 @@ public class WordService {
     public List<WordResponse> getTodayWords() {
         LocalDate day = wordRepository.getMaxDate();
 
-        List<Word> todayWords = wordRepository.findByDay(day);
+        List<Word> todayWords = wordRepository.findByDayAndFinished(day, false);
 
         return todayWords.stream()
                     .map(wordMapper::toWordResponse)

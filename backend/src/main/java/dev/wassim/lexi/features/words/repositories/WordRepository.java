@@ -13,7 +13,7 @@ public interface WordRepository extends JpaRepository<Word , Long> {
     @Query("SELECT MAX(w.day) FROM Word w")
     LocalDate getMaxDate();
 
-    List<Word> findByDay(LocalDate day);
+    List<Word> findByDayAndFinished(LocalDate day , boolean finished);
 
     boolean existsByDay(LocalDate day);
 }
