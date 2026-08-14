@@ -2,6 +2,8 @@ package dev.wassim.lexi.domain.modal;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.Audited.Table;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import lombok.Data;
 @Data
 @Builder
 @Entity
+@Table(name = "words")
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
