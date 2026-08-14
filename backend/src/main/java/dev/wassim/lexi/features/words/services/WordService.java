@@ -18,9 +18,9 @@ public class WordService {
     private final WordMapper wordMapper;
 
     public List<WordResponse> getTodayWords() {
-        LocalDate today = LocalDate.now();
+        LocalDate day = wordRepository.getMaxDate();
 
-        List<Word> todayWords = wordRepository.findByDay(today);
+        List<Word> todayWords = wordRepository.findByDay(day);
 
         return todayWords.stream()
                     .map(wordMapper::toWordResponse)
