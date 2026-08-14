@@ -7,12 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 @Entity
+@Table(name = "words")
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +37,7 @@ public class Word {
     private String wrongMeaning3;
 
     private LocalDate day;
+
+    @Builder.Default
+    private boolean finished = false;
 }
