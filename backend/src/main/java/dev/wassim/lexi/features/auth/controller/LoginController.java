@@ -7,6 +7,7 @@ import dev.wassim.lexi.common.constants.ApiPaths;
 import dev.wassim.lexi.domain.modal.User;
 import dev.wassim.lexi.features.auth.dto.request.LoginRequest;
 import dev.wassim.lexi.features.auth.services.LoginService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public User postMethodName(@RequestBody LoginRequest request) {
+    public User login(@RequestBody @Valid LoginRequest request) {
         return loginService.login(request);
     }
     
