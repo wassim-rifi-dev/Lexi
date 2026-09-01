@@ -15,8 +15,7 @@ public class RegisterService {
     private final PasswordEncoder passwordEncoder;
 
     public User register(RegisterRequest request) {
-        User user = new User()
-                    .builder()
+        User user = User.builder()
                     .first_name(request.first_name())
                     .last_name(request.last_name())
                     .username(request.username())
