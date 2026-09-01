@@ -1,4 +1,4 @@
-package dev.wassim.lexi.features.user.dto.request;
+package dev.wassim.lexi.features.auth.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -6,14 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 @Builder
-public record RegisterRequest(
-    String first_name,
-
-    String last_name,
-
-    @NotBlank(message = "Username is required")
-    String username,
-
+public record LoginRequest(
     @NotBlank(message = "Email is required")
     @Email
     String email,
