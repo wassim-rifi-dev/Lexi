@@ -15,6 +15,10 @@ public class RegisterService {
     private final PasswordEncoder passwordEncoder;
 
     public User register(RegisterRequest request) {
+        if (userRepository.existsByEmail(request.email())) {
+            throw new RuntimeException("This email is existes.");
+        }
+
         User user = User.builder()
                     .first_name(request.first_name())
                     .last_name(request.last_name())
