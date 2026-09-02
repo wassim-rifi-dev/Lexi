@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import dev.wassim.lexi.common.constants.PublicPaths;
+
 @Configuration
 public class SecurityConfig {
     @Bean
@@ -18,7 +20,7 @@ public class SecurityConfig {
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers(PublicPaths.PUBLIC_ENDPOINTS).permitAll()
                 .anyRequest().authenticated()
             );
 

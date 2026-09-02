@@ -4,6 +4,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class ApiPaths {
+    public static final String API_AUTH_MATCHER = "api/auth/**";
+
     public static final String Api_Words = "api/words";
     public static final String API_USER = "api/users";
     public static final String API_AUTH = "api/auth";
