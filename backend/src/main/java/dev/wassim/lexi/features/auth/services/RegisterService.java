@@ -19,6 +19,10 @@ public class RegisterService {
             throw new RuntimeException("This email is existes.");
         }
 
+        if (userRepository.existsByUsername(request.username())) {
+            throw new RuntimeException("This username is already existes.");
+        }
+
         User user = User.builder()
                     .first_name(request.first_name())
                     .last_name(request.last_name())
