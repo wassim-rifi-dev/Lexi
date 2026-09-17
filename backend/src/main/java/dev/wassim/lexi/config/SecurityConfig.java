@@ -13,8 +13,8 @@ import dev.wassim.lexi.common.constants.PublicPaths;
 @Configuration
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http , CorsConfigurationSource corsConfigurationSource) {
-        http
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CorsConfigurationSource corsConfigurationSource) throws Exception {
+        return http
             .cors(cors -> cors.configurationSource(corsConfigurationSource))
             .csrf(csrf -> csrf.disable())
             .formLogin(form -> form.disable())
@@ -22,9 +22,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(PublicPaths.PUBLIC_ENDPOINTS).permitAll()
                 .anyRequest().authenticated()
-            );
-
-        return http.build();
+            ).build();
     }
 
     @Bean
